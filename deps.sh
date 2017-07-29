@@ -2,7 +2,7 @@ rm -rf tmp;
 mkdir tmp;
 cd tmp;
 
-git clone https://github.com/ErmanSayin/3ds_portlibs.git;
+git clone https://github.com/devkitPro/3ds_portlibs.git;
 git clone https://github.com/xerpi/sf2dlib.git;
 git clone https://github.com/xerpi/sftdlib.git;
 git clone https://github.com/xerpi/sfillib.git;
