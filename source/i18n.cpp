@@ -10,6 +10,7 @@
 #include "i18n/spanish.cpp"
 #include "i18n/portuguese.cpp"
 #include "i18n/russian.cpp"
+#include "i18n/dutch.cpp"
 
 u8 lang = 1;
 
@@ -52,6 +53,9 @@ wstring i18n(const string& token){
 			break;
 		case CFG_LANGUAGE_RU:
 			langMap = RUSSIAN;
+			break;
+		case CFG_LANGUAGE_NL:
+			langMap = DUTCH;
 			break;
 		default:
 			langMap = ENGLISH;
