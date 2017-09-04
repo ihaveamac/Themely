@@ -14,7 +14,7 @@
 - Install without BGM
 - Theme shuffle
 - Theme dumping
-- Multilingual (French, German, Italian, Portuguese, Russian, and Spanish available)<b>&#x002A;</b>
+- Multilingual (French, German, Italian, Portuguese, Russian, Spanish, and Dutch available)<b>&#x002A;</b>
 - Self updater
 
 (<b>&#x002A;</b> = new in the latest stable release)
