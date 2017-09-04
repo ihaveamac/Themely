@@ -28,7 +28,7 @@ EXTRA_OUTPUT_FILES :=
 LIBRARY_DIRS := $(DEVKITPRO)/libctru $(PORTLIBS)
 LIBRARIES := vorbisidec ogg sfil sftd sf2d freetype png z
 
-BUILD_FLAGS := -DVERSION='"1.3.1-i0"'
+BUILD_FLAGS := -DVERSION='"1.3.1-i1"'
 RUN_FLAGS :=
 
 DEBUG ?= 1

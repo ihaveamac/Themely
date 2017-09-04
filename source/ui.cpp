@@ -207,6 +207,8 @@ void drawMain(gfxScreen_t screen){
 				sftd_draw_wtext_center(FONT.light, 0, 38, 0xFFFFFFFF, 24, i18n("no_themes_1").c_str());
 				sftd_draw_wtext_center(FONT.normal, 0, 38 + 26 + 13, 0xFFFFFFFF, 13, i18n("no_themes_2").c_str());
 				sftd_draw_wtext_center(FONT.normal, 0, 38 + 26 + 13*2, 0xFFFFFFFF, 13, i18n("no_themes_3").c_str());
+				sftd_draw_wtext_center(FONT.normal, 0, 38 + 30 + 13*4, 0xFFFFFFFF, 13, L"There's a new open-source theme manager: Anemone3DS!");
+				sftd_draw_wtext_center(FONT.normal, 0, 38 + 30 + 13*5, 0xFFFFFFFF, 13, L"http://gbatemp.net/threads/482804/");
 			}
 		}
 	} else {
