@@ -26,7 +26,7 @@ std::map<std::string, std::wstring> DUTCH = {
 	{"delete_prompt_1",     L"Weet je zeker dat je"},
 	{"delete_prompt_2",     L"dit thema wil verwijderen?"},
 	{"dump_prompt",         L"Dump nu geïnstalleerde thema?"},
-	{"dump_prompt_warn",    L"Plaats geen officiële Thema's op 3DSThem.es!"},
+	{"dump_prompt_warn",    L"Plaats geen officiële Thema's op themeplaza.eu!"},
 	{"playing",             L"Spelen..."},
 	{"no_themes_1",         L"Geen thema's gevonden!"},
 	{"no_themes_2",         L"Ga naar themeplaza.eu op uw computer, download een paar thema's,"},
