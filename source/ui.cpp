@@ -179,43 +179,52 @@ void drawMain(gfxScreen_t screen){
 					}
 				}
 
-				if(isInstalling){
-					sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
-					sftd_draw_wtext_center_xy(FONT.huge, 0, 0, 0xFFFFFFFF, 48, i18n("installing").c_str());
-				} else if(downloading > -1){
-					sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
-					sftd_draw_wtext_center_xy(FONT.huge, 0, 0, 0xFFFFFFFF, 48, i18n("downloading").c_str());
-					sf2d_draw_rectangle(0, 215, downloading * 4, 25, 0xFFBC47AB);
-					sftd_draw_text_center(FONT.normal, 0, 219, 0xFFFFFFFF, 13, (to_string(downloading) + "%").c_str());
-				} else if(update.size() != 0){
-					sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
-					sftd_draw_wtext(FONT.light, 14, 14 + updateTextOffset, 0xFFFFFFFF, 24, i18n("new_update").c_str());
-					sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset, 0xFFFFFFFF, 13, update.c_str());
-				} else if(upgradeToAnemone){
-					sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
-					sftd_draw_wtext(FONT.light, 14, 14 + updateTextOffset, 0xFFFFFFFF, 24, L"Upgrade to Anemone3DS!");
-					if (is_upgrading)
-						sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset, 0xFFFFFFFF, 13, "Upgrading!");
-					else
-						sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset, 0xFFFFFFFF, 13, "stuff goes here\n\n\nhmm");
-				} else if(deletePrompt){
-					sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
-					sftd_draw_wtext_center(FONT.light, 0, 56, 0xFFFFFFFF, 24, i18n("delete_prompt_1").c_str());
-					sftd_draw_wtext_center(FONT.light, 0, 56 + 26, 0xFFFFFFFF, 24, i18n("delete_prompt_2").c_str());
-				} else if(dumpPrompt){
-					sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
-					sftd_draw_wtext_center(FONT.light, 0, 56 + 26, 0xFFFFFFFF, 24, i18n("dump_prompt").c_str());
-					sftd_draw_wtext_center(FONT.normal, 0, 56 + 26*2, 0x880000FF, 13, i18n("dump_prompt_warn").c_str());
-				} else if(currentPlayingAudio || audioIsPlaying){
-					sf2d_draw_rectangle(0, 0, 400, 240, 0x88000000);
-					sftd_draw_wtext_center(FONT.huge, 0, 240/2 - 48/2, 0xFFFFFFFF, 48, i18n("playing").c_str());
-				}
 			} else if(themes.size() == 0){
 				sftd_draw_wtext_center(FONT.light, 0, 38, 0xFFFFFFFF, 24, i18n("no_themes_1").c_str());
 				sftd_draw_wtext_center(FONT.normal, 0, 38 + 26 + 13, 0xFFFFFFFF, 13, i18n("no_themes_2").c_str());
 				sftd_draw_wtext_center(FONT.normal, 0, 38 + 26 + 13*2, 0xFFFFFFFF, 13, i18n("no_themes_3").c_str());
 				sftd_draw_wtext_center(FONT.normal, 0, 38 + 30 + 13*4, 0xFFFFFFFF, 13, L"There's a new open-source theme manager: Anemone3DS!");
 				sftd_draw_wtext_center(FONT.normal, 0, 38 + 30 + 13*5, 0xFFFFFFFF, 13, L"http://gbatemp.net/threads/482804/");
+			}
+			if(isInstalling){
+				sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
+				sftd_draw_wtext_center_xy(FONT.huge, 0, 0, 0xFFFFFFFF, 48, i18n("installing").c_str());
+			} else if(downloading > -1){
+				sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
+				sftd_draw_wtext_center_xy(FONT.huge, 0, 0, 0xFFFFFFFF, 48, i18n("downloading").c_str());
+				sf2d_draw_rectangle(0, 215, downloading * 4, 25, 0xFFBC47AB);
+				sftd_draw_text_center(FONT.normal, 0, 219, 0xFFFFFFFF, 13, (to_string(downloading) + "%").c_str());
+			} else if(update.size() != 0){
+				sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
+				sftd_draw_wtext(FONT.light, 14, 14 + updateTextOffset, 0xFFFFFFFF, 24, i18n("new_update").c_str());
+				sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset, 0xFFFFFFFF, 13, update.c_str());
+			} else if(upgradeToAnemone){
+				sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
+				sftd_draw_wtext(FONT.light, 14, 14 + updateTextOffset, 0xFFFFFFFF, 24, L"Upgrade to Anemone3DS!");
+				if (is_upgrading){
+					sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset, 0xFFFFFFFF, 13, "Anemone3DS is downloading and being installed!");
+					if (!envIsHomebrew()){
+						sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset + 17, 0xFFFFFFFF, 13, "After this is done, Themely will uninstall itself.");
+					}
+				} else {
+					sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset, 0xFFFFFFFF, 13, "Anemone3DS is a free and open source theming suite for the 3DS,\nsupporting both themes and splashes.");
+					sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset + 13*3, 0xFFFFFFFF, 13, "It is a new replacement for Themely and is being actively developed.");
+					sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset + 13*5, 0xFFFFFFFF, 13, "You can see more details at:");
+					sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset + 13*6, 0xFFFFAAAA, 13, "http://gbatemp.net/threads/482804/");
+					if (!envIsHomebrew())
+						sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset + 13*8, 0xFFFFFFFF, 13, "If you decide to install Anemone3DS, Themely will be automatically\nuninstalled.");
+				}
+			} else if(deletePrompt){
+				sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
+				sftd_draw_wtext_center(FONT.light, 0, 56, 0xFFFFFFFF, 24, i18n("delete_prompt_1").c_str());
+				sftd_draw_wtext_center(FONT.light, 0, 56 + 26, 0xFFFFFFFF, 24, i18n("delete_prompt_2").c_str());
+			} else if(dumpPrompt){
+				sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
+				sftd_draw_wtext_center(FONT.light, 0, 56 + 26, 0xFFFFFFFF, 24, i18n("dump_prompt").c_str());
+				sftd_draw_wtext_center(FONT.normal, 0, 56 + 26*2, 0x880000FF, 13, i18n("dump_prompt_warn").c_str());
+			} else if(currentPlayingAudio || audioIsPlaying){
+				sf2d_draw_rectangle(0, 0, 400, 240, 0x88000000);
+				sftd_draw_wtext_center(FONT.huge, 0, 240/2 - 48/2, 0xFFFFFFFF, 48, i18n("playing").c_str());
 			}
 		}
 	} else {
