@@ -191,6 +191,13 @@ void drawMain(gfxScreen_t screen){
 					sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
 					sftd_draw_wtext(FONT.light, 14, 14 + updateTextOffset, 0xFFFFFFFF, 24, i18n("new_update").c_str());
 					sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset, 0xFFFFFFFF, 13, update.c_str());
+				} else if(upgradeToAnemone){
+					sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
+					sftd_draw_wtext(FONT.light, 14, 14 + updateTextOffset, 0xFFFFFFFF, 24, L"Upgrade to Anemone3DS!");
+					if (is_upgrading)
+						sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset, 0xFFFFFFFF, 13, "Upgrading!");
+					else
+						sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset, 0xFFFFFFFF, 13, "stuff goes here\n\n\nhmm");
 				} else if(deletePrompt){
 					sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
 					sftd_draw_wtext_center(FONT.light, 0, 56, 0xFFFFFFFF, 24, i18n("delete_prompt_1").c_str());
@@ -269,6 +276,10 @@ void drawMain(gfxScreen_t screen){
 			sftd_draw_wtext_center(FONT.normal, 0, 40 + 13*3, 0xFFFFFFFF, 13, i18n("qr_explain_3").c_str());
 			sftd_draw_wtext_center(FONT.normal, 0, 40 + 13*4, 0xFFFFFFFF, 13, i18n("qr_explain_4").c_str());
 		} else {
+			// uprgade button
+			sf2d_draw_rectangle(85, 0, 150, 30, 0xFFA87427);
+			sftd_draw_wtext_center(FONT.normal, 0, 7, 0xFFFFFFFF, 13, L"Upgrade to Anemone3DS");
+
 			// qr icon
 			sf2d_draw_texture_part(TEXTURE.ui.tx, 320 - 3 - 24, 3, 122, 0, 24, 24);
 
@@ -291,6 +302,17 @@ void drawMain(gfxScreen_t screen){
 		} else if(update.size() != 0){
 			sf2d_draw_rectangle(0, 0, 320, 240, 0xEE000000);
 			sftd_draw_wtext_center(FONT.light, 0, 42, 0xFFFFFFFF, 24, i18n("update_prompt").c_str());
+
+			sf2d_draw_texture_part(TEXTURE.ui.tx, 110, 98, 669, 270, 100, 40);
+			sf2d_draw_texture_part(TEXTURE.ui.tx, 110 + 85 + 6, 98 + 25 + 6, 400, 0, 15, 15);
+			sftd_draw_wtext_center(FONT.light, 0, 103, 0xFFFFFFFF, 24, i18n("yes").c_str());
+
+			sf2d_draw_texture_part(TEXTURE.ui.tx, 110, 142, 669, 270, 100, 40);
+			sf2d_draw_texture_part(TEXTURE.ui.tx, 110 + 85 + 6, 142 + 25 + 6, 415, 0, 15, 15);
+			sftd_draw_wtext_center(FONT.light, 0, 147, 0xFFFFFFFF, 24, i18n("no").c_str());
+		} else if(upgradeToAnemone){
+			sf2d_draw_rectangle(0, 0, 320, 240, 0xEE000000);
+			sftd_draw_wtext_center(FONT.light, 0, 42, 0xFFFFFFFF, 24, L"Install Anemone3DS?");
 
 			sf2d_draw_texture_part(TEXTURE.ui.tx, 110, 98, 669, 270, 100, 40);
 			sf2d_draw_texture_part(TEXTURE.ui.tx, 110 + 85 + 6, 98 + 25 + 6, 400, 0, 15, 15);

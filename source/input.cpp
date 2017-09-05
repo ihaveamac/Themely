@@ -76,6 +76,18 @@ int INPUT_handle(){
 		return 0;
 	}
 
+	if(upgradeToAnemone){
+		if(kUp & KEY_A){
+			is_upgrading = true;
+			UI_update();
+			installAnemone();
+		}
+		else if(kUp & KEY_B)
+			upgradeToAnemone = false;
+
+		return 0;
+	}
+
 	if(deletePrompt){
 		if(kUp & KEY_A)
 			deleteTheme();
@@ -192,6 +204,9 @@ int INPUT_handle(){
 
 					if(checkTouch(320 - 3*2 - 24*2, 3, 24, 24))
 						dumpPrompt = true;
+
+					if(checkTouch(85, 0, 150, 30))
+						upgradeToAnemone = true;
 
 					if(checkTouch(3, 3, 24, 24))
 						shuffleMode = true;

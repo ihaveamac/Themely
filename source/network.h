@@ -10,10 +10,12 @@
 using nlohmann::json;
 
 extern string update;
+extern bool is_upgrading;
 extern int downloading;
 
 Result HTTPGet(vector<char>&, string, string* fileName = NULL, int* progress = NULL);
 
+void installAnemone();
 void checkForUpdate(void*);
 void installUpdate();
 

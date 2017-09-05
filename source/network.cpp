@@ -4,6 +4,7 @@
 #include "network.h"
 
 string update;
+bool is_upgrading = false;
 string updateDownloadURL;
 int downloading = -1;
 
@@ -149,10 +150,75 @@ Result HTTPGet(vector<char>& returnedVec, string url, string* fileName, int* pro
 	return 0;
 }
 
+void installAnemone(){
+	// get the latest release
+	vector<char> httpData;
+	Result ret = HTTPGet(httpData, string("https://api.github.com/repos/astronautlevel2/Anemone3DS/releases"));
+	if(ret){
+		printf("Failed to check for an update.\n");
+		return;
+	}
+
+	json releases;
+
+	try {
+		releases = json::parse(httpData);
+	} catch (...) {
+		printf("Failed to check for an update.\n");
+		return;
+	}
+
+	for (size_t i = 0; i < releases[0]["assets"].size(); i++){
+		string name = releases[0]["assets"][i]["name"];
+		if(
+			(envIsHomebrew() && name.substr(name.find(".") + 1) == "3dsx") ||
+			(!envIsHomebrew() && name.substr(name.find(".") + 1) == "cia")
+		)
+			updateDownloadURL = releases[0]["assets"][i]["browser_download_url"];
+	}
+
+	// install Anemone3DS
+	if(envIsHomebrew()){
+		vector<char> threedsxData;
+		Result ret = HTTPGet(threedsxData, updateDownloadURL);
+		if(ret)
+			return throwError(i18n("err_update_dl_fail") + L" " + i18n("err_update_manual"), ret, true);
+
+		Handle threedsxHandle;
+		FSUSER_DeleteFile(ARCHIVE_SD, fsMakePath(PATH_ASCII, "/3ds/Anemone3DS.3dsx"));
+		FSUSER_DeleteFile(ARCHIVE_SD, fsMakePath(PATH_ASCII, "/3ds/Anemone3DS/Anemone3DS.3dsx"));
+		if(FSUSER_CreateFile(ARCHIVE_SD, fsMakePath(PATH_ASCII, "/3ds/Anemone3DS.3dsx"), 0, (u64)threedsxData.size()))
+			return throwError("Failed to create Anemone3DS.3dsx", 0, true);
+
+		if(FSUSER_OpenFile(&threedsxHandle, ARCHIVE_SD, fsMakePath(PATH_ASCII, "/3ds/Anemone3DS.3dsx"), FS_OPEN_WRITE, 0))
+			return throwError("Failed to open Anemone3DS.3dsx", 0, true);
+
+		if(FSFILE_Write(threedsxHandle, nullptr, 0, &threedsxData[0], (u64)threedsxData.size(), FS_WRITE_FLUSH))
+			return throwError("Failed to write to Anemone3DS.3dsx.", 0, true);
+
+		FSFILE_Close(threedsxHandle);
+	} else {
+		vector<char> ciaData;
+		Result ret = HTTPGet(ciaData, updateDownloadURL);
+		if(ret)
+			return throwError(i18n("err_update_dl_fail") + L" " + i18n("err_update_titledb"), ret, true);
+
+		amInit();
+		Handle handle;
+		AM_QueryAvailableExternalTitleDatabase(NULL);
+		AM_StartCiaInstall(MEDIATYPE_SD, &handle);
+		FSFILE_Write(handle, nullptr, 0, &ciaData[0], (u64)ciaData.size(), 0);
+		AM_FinishCiaInstall(handle);
+		amExit();
+	}
+
+	closing = true;
+}
+
 void checkForUpdate(void*){
 	vector<char> httpData;
 	bool bleeding = string(VERSION).substr(string(VERSION).find("-") + 1) == "git";
-	Result ret = HTTPGet(httpData, string("https://api.github.com/repos/ihaveamac/Themely") + (bleeding ? "-bleeding" : "") + "/releases");
+	Result ret = HTTPGet(httpData, string("https://api.github.com/repos/ihaveamac/Themely/releases"));
 	if(ret){
 		printf("Failed to check for an update.\n");
 		return;

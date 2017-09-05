@@ -8,6 +8,7 @@ bool themesScanned = false;
 bool isInstalling = false;
 wstring installProgress = L"";
 
+bool upgradeToAnemone = false;
 bool deletePrompt = false;
 bool dumpPrompt = false;
 

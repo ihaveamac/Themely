@@ -34,6 +34,7 @@ extern bool themesScanned;
 extern bool isInstalling;
 extern wstring installProgress;
 
+extern bool upgradeToAnemone;
 extern bool deletePrompt;
 extern bool dumpPrompt;
 
