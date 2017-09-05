@@ -209,6 +209,7 @@ void installAnemone(){
 		AM_StartCiaInstall(MEDIATYPE_SD, &handle);
 		FSFILE_Write(handle, nullptr, 0, &ciaData[0], (u64)ciaData.size(), 0);
 		AM_FinishCiaInstall(handle);
+		AM_DeleteAppTitle(MEDIATYPE_SD, 0x000400000374E500LL);
 		amExit();
 	}
 
