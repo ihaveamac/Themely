@@ -14,7 +14,7 @@
 - Install without BGM
 - Theme shuffle
 - Theme dumping
-- Multilingual (French, German, Italian, Portuguese, Russian, and Spanish available)<b>&#x002A;</b>
+- Multilingual (French, German, Italian, Portuguese, Russian, Spanish, and Dutch available)<b>&#x002A;</b>
 - Self updater
 
 (<b>&#x002A;</b> = new in the latest stable release)
@@ -46,6 +46,7 @@ Run `make` to build the 3DSX, CIA, and ZIP files,  `make run` to build & run on 
 - Jubash for Portuguese translation
 - Ann0ying for Russian translation
 - umbjolt for Spanish translation
+- QuaserEatingATaco for Dutch translation
 
 # License
 This software is licensed under GNU GPLv3. Check LICENSE.
