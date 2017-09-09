@@ -203,16 +203,16 @@ void drawMain(gfxScreen_t screen){
 				sftd_draw_wtext(FONT.light, 14, 14 + updateTextOffset, 0xFFFFFFFF, 24, L"Upgrade to Anemone3DS!");
 				if (is_upgrading){
 					sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset, 0xFFFFFFFF, 13, "Anemone3DS is downloading and being installed!");
-					if (!envIsHomebrew()){
+					/*if (!envIsHomebrew()){
 						sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset + 17, 0xFFFFFFFF, 13, "After this is done, Themely will uninstall itself.");
-					}
+					}*/
 				} else {
 					sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset, 0xFFFFFFFF, 13, "Anemone3DS is a free and open source theming suite for the 3DS,\nsupporting both themes and splashes.");
 					sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset + 13*3, 0xFFFFFFFF, 13, "It is a new replacement for Themely and is being actively developed.");
 					sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset + 13*5, 0xFFFFFFFF, 13, "You can see more details at:");
 					sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset + 13*6, 0xFFFFAAAA, 13, "http://gbatemp.net/threads/482804/");
-					if (!envIsHomebrew())
-						sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset + 13*8, 0xFFFFFFFF, 13, "If you decide to install Anemone3DS, Themely will be automatically\nuninstalled.");
+					/*if (!envIsHomebrew())
+						sftd_draw_text(FONT.normal, 14, 14 + 24 + updateTextOffset + 13*8, 0xFFFFFFFF, 13, "If you decide to install Anemone3DS, Themely will be automatically\nuninstalled.");*/
 				}
 			} else if(deletePrompt){
 				sf2d_draw_rectangle(0, 0, 400, 240, 0xEE000000);
